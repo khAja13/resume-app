@@ -1,35 +1,43 @@
-import "./globals.css"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import Header from "@/components/header"
-import { SessionProvider } from "next-auth/react"
-import { auth } from "@/auth"
-import dotenv from 'dotenv';
-dotenv.config()
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Header from "@/components/header";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
+import dotenv from "dotenv";
+import { NextUIProvider } from "@nextui-org/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeSwitcher } from "@/components/ui/Theme";
 
-const inter = Inter({ subsets: ["latin"] })
+dotenv.config();
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Resume checker",
-  description:
-    "Resume checker",
-}
+    title: "Resume checker",
+    description: "Resume checker",
+};
 
-export default async function RootLayout({ children }: React.PropsWithChildren) {
-  const session = await auth();
-  return (
-    <SessionProvider session={session}  basePath={"/auth"}>
-      <html lang="en">
-        <body className={inter.className}>
-          <div className="flex h-full min-h-screen w-full flex-col justify-between">
-            <Header />
-            <main className="mx-auto w-full max-w-3xl flex-auto px-4 py-4 sm:px-6 md:py-6">
-              {children}
-            </main>
-          </div>
-        </body>
-      </html>
-    </SessionProvider>
+export default async function RootLayout({
+    children,
+}: React.PropsWithChildren) {
+    const session = await auth();
 
-  )
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body
+                className="flex h-full min-h-screen w-full flex-col justify-between bg-background"
+                suppressHydrationWarning
+            >
+                <NextUIProvider>
+                    <NextThemesProvider attribute="class" defaultTheme="dark">
+                        <SessionProvider session={session} basePath="/auth">
+                            <Header />
+                            {children}
+                        </SessionProvider>
+                    </NextThemesProvider>
+                </NextUIProvider>
+            </body>
+        </html>
+    );
 }

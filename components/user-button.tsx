@@ -23,7 +23,7 @@ export default async function UserButton() {
           <Button
             variant="outline"
             size="icon"
-            className="overflow-hidden rounded-full"
+            className="overflow-hidden rounded-full bg-background"
           >
             <Image
               src={session.user?.image ?? '/placeholder-user.jpg'}
@@ -34,12 +34,12 @@ export default async function UserButton() {
             />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="bg-background">
           {session.user ? (
             <>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">
+                  <p className="text-sm font-medium leading-none text-foreground">
                     {session.user.name}
                   </p>
                   <p className="text-muted-foreground text-xs leading-none">
@@ -50,7 +50,7 @@ export default async function UserButton() {
               <SignOut />
             </>
           ) : (
-            <DropdownMenuItem>
+            <DropdownMenuItem className="text-foreground">
               <Link href="/login">Sign In</Link>
             </DropdownMenuItem>
           )}

@@ -11,6 +11,7 @@ import Header from "@/components/header";
 import { worker } from "@/lib/workerInit";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Site from "./site";
 
 export default function Main({ session }) {
     const [loading, setLoading] = useState(true);
@@ -20,14 +21,7 @@ export default function Main({ session }) {
         setLoading(false);
     }, []);
 
-    const handleButtonClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
-    const handleFileChange = async (event: any) => {
-        const file = event.target.files[0];
+    const handleFileChange = async (file: any) => {
         fileInputRef.current.value = "";
 
         if (file) {
@@ -57,17 +51,7 @@ export default function Main({ session }) {
                     <ClipLoader />
                 </div>
             ) : (
-                <Card>
-                    <CardContent className="p-6 space-y-4">
-                        <input
-                            type="file"
-                            ref={fileInputRef}
-                            style={{ display: 'none' }}
-                            onChange={handleFileChange}
-                        />
-                        <UploadButton fileInputRef={fileInputRef} loading={loading} session={session} />
-                    </CardContent>
-                </Card>
+                <Site fileInputRef={fileInputRef} loading={loading} session={session} handleFileChange={handleFileChange} />
             )}
             <ToastContainer />
         </>
