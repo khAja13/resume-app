@@ -44,17 +44,7 @@ export function UploadButton({ fileInputRef, loading, session, handleFileChange 
                             return;
                         }
 
-                        const files = e.dataTransfer.files;
-                        if (files && files.length > 0) {
-                            const file = files[0];
-                            const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-                            
-                            if (validTypes.includes(file.type)) {
-                                handleFileChange(file);
-                            } else {
-                                toast("Please upload a PDF, DOC, or DOCX file");
-                            }
-                        }
+                        handleFileChange(e, true);
                     }}
                 >
                     <div className="mb-4 sm:mb-6">
