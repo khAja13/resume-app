@@ -15,7 +15,43 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Resume checker",
-    description: "Resume checker",
+    description: "Free resume checker and analyzer. Get instant feedback on your resume and improve your chances of landing your dream job.",
+    keywords: ["resume checker", "resume feedback", "resume improvement", "job application helper"],
+    authors: [{ name: "Sanjay" }],
+    openGraph: {
+        title: "Resume checker",
+        description: "Free resume checker and analyzer",
+        type: "website",
+        url: "https://7cb9-2405-201-c029-507f-9ded-5240-d879-b885.ngrok-free.app/",
+        images: [
+            {
+                url: "/images/og-banner.png",
+                width: 1200,
+                height: 630,
+                alt: "Resume checker preview",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Resume checker",
+        description: "Free resume checker and analyzer",
+        images: ["/images/og-banner.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
+    verification: {
+        google: "your-google-verification-code", // Add your Google Search Console verification code
+    },
 };
 
 export default async function RootLayout({
